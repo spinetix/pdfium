@@ -23,6 +23,7 @@ config("pdfium_common_config") {
     "OPJ_STATIC",
     "PNG_PREFIX",
     "PNG_USE_READ_MACROS",
+    "FPDFSDK_EXPORTS"
   ]
 
   if (pdf_enable_click_logging) {
@@ -126,7 +127,7 @@ jumbo_source_set("pdfium_public_headers") {
   public_configs = [ ":pdfium_public_config" ]
 }
 
-jumbo_static_library("pdfium") {
+shared_library("pdfium") {
   sources = [
     "fpdfsdk/fpdf_annot.cpp",
     "fpdfsdk/fpdf_attachment.cpp",
@@ -148,7 +149,7 @@ jumbo_static_library("pdfium") {
     "fpdfsdk/fpdf_sysfontinfo.cpp",
     "fpdfsdk/fpdf_text.cpp",
     "fpdfsdk/fpdf_transformpage.cpp",
-    "fpdfsdk/fpdf_view.cpp",
+    "fpdfsdk/fpdf_view.cpp"
   ]
 
   libs = []
