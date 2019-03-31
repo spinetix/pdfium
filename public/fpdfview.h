@@ -160,7 +160,7 @@ typedef int FPDF_OBJECT_TYPE;
 #define FPDF_CALLCONV __stdcall
 #else
 #define FPDF_EXPORT
-#define FPDF_CALLCONV
+#define FPDF_CALLCONV __stdcall
 #endif
 
 // Exported Functions
