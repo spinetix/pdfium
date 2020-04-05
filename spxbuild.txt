@@ -1,0 +1,44 @@
+Win32:
+
+Launch in a VS2019 x64 x86 Cross Tools Command Prompt:
+You may need a python -m pip install pywin32
+
+Assuming you did already a git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git':
+
+set PATH=C:\SpinetiX\sources\git\depot_tools;%PATH%
+set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+gclient config --unmanaged --name=pdfium https://github.com/spinetix/pdfium.git@spx-3987
+gclient sync
+cd pdfium
+cd build
+git apply -3 C:\SpinetiX\sources\ext\build-scripts\pdfium\build.patch
+cd ..
+
+For debug build: 
+
+buildtools\win\gn.exe gen out/Debug --args="is_official_build=false is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=true pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
+ninja -C out/Debug pdfium
+
+For release build:
+
+buildtools\win\gn.exe gen out/Release --args="is_official_build=true is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
+ninja -C out/Release pdfium
+
+Linux64:
+
+Assuming you did already a git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git':
+- add your depot_tools to the path
+- create a new folder for the build and cd
+gclient config --unmanaged --name=pdfium https://github.com/spinetix/pdfium.git@spx-3987
+gclient sync
+cd pdfium
+
+For debug build:
+
+gn gen out/Debug --args='is_official_build=false is_component_build=false is_desktop_linux=false clang_use_chrome_plugins=false use_goma=false is_debug=true pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false x64_arch="goldmont"'
+ninja -C out/Debug pdfium
+
+For release build:
+
+gn gen out/Release --args='is_official_build=true is_component_build=false is_desktop_linux=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false x64_arch="goldmont" is_cfi=false'
+ninja -C out/Release pdfium
