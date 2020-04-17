@@ -1,6 +1,6 @@
 Win32:
 
-Launch in a VS2019 x64 x86 Cross Tools Command Prompt:
+Launch in a VS2019 x64 x86 Cross or x64 Native Tools Command Prompt:
 You may need a python -m pip install pywin32
 
 Assuming you did already a git clone 'https://chromium.googlesource.com/chromium/tools/depot_tools.git':
@@ -16,13 +16,23 @@ cd ..
 
 For debug build: 
 
-buildtools\win\gn.exe gen out/Debug --args="is_official_build=false is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=true pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
-ninja -C out/Debug pdfium
+32-bit:
+buildtools\win\gn.exe gen out/Debug32 --args="is_official_build=false is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=true pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
+ninja -C out/Debug32 pdfium
+
+64-bit:
+buildtools\win\gn.exe gen out/Debug64 --args="is_official_build=false is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=true pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x64\""
+ninja -C out/Debug64 pdfium
 
 For release build:
 
-buildtools\win\gn.exe gen out/Release --args="is_official_build=true is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
-ninja -C out/Release pdfium
+32-bit:
+buildtools\win\gn.exe gen out/Release32 --args="is_official_build=true is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x86\""
+ninja -C out/Release32 pdfium
+
+64-bit:
+buildtools\win\gn.exe gen out/Release64 --args="is_official_build=true is_component_build=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false target_cpu=\"x64\""
+ninja -C out/Release64 pdfium
 
 Linux64:
 
