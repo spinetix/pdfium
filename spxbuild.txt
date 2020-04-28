@@ -52,3 +52,9 @@ For release build:
 
 gn gen out/Release --args='is_official_build=true is_component_build=false is_desktop_linux=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false x64_arch="goldmont" is_cfi=false'
 ninja -C out/Release pdfium
+
+For ARYA build:
+
+gn gen out/Release --args='is_official_build=true is_component_build=false is_desktop_linux=false clang_use_chrome_plugins=false use_goma=false is_debug=false pdf_is_standalone=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false pdf_use_skia_paths=false is_cfi=false'
+ninja -C out/Release pdfium
+strip out/Release/libpdfium.so
